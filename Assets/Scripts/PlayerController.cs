@@ -25,19 +25,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        /*if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            transform.localScale = new Vector2(5, 5);
-            playerRigidbody.velocity = new Vector2(0, playerRigidbody.velocity.y);
-            playerRigidbody.AddForce(horizForce);
-        }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            transform.localScale = new Vector2(-5, 5);
-            playerRigidbody.velocity = new Vector2(0, playerRigidbody.velocity.y);
-            playerRigidbody.AddForce(-horizForce);
-        }
-        else */if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
         }
