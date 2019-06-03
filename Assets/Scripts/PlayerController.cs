@@ -76,11 +76,25 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.tag == "Ground")
+        if (collision.gameObject.tag == "Ground")
         {
             didJump = false;
             jumpCount = 0;
             playerAnimator.enabled = true;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Cherry")
+        {
+            GameManager.instance.AddScore(100);
+            Destroy(collision.gameObject);
+        }
+        else if (collision.gameObject.tag == "Gem")
+        {
+            GameManager.instance.AddScore(1000);
+            Destroy(collision.gameObject);
         }
     }
 }
