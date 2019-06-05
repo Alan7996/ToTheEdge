@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 jumpForce = new Vector2(0, 350);
     private int jumpCount = 0;
     private bool didJump = false;
+    private bool atDoor = false;
 
     public Sprite idleSprite;
     public Sprite jumpUpSprite;
@@ -28,6 +29,9 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
+        } else if (atDoor && Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            GameManager.instance.LoadNextLevel();
         }
 
         if (Input.GetKey(KeyCode.RightArrow))
@@ -95,6 +99,18 @@ public class PlayerController : MonoBehaviour
         {
             GameManager.instance.AddScore(1000);
             Destroy(collision.gameObject);
+        }
+        else if (collision.gameObject.tag == "Door")
+        {
+            atDoor = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Door")
+        {
+            atDoor = false;
         }
     }
 }

@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     private static GameManager m_instance;
 
     private int score = 0;
+    private int level = 1;
     public bool isGameover { get; private set; }
 
     private void Awake()
@@ -47,6 +48,13 @@ public class GameManager : MonoBehaviour
             score += newScore;
             UIManager.instance.UpdateScoreText(score);
         }
+    }
+
+    public void LoadNextLevel()
+    {
+        level++;
+        Debug.Log(level);
+        //SceneManager.LoadScene(level);
     }
 
     public void EndGame()
