@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
 
         PlayerPrefs.SetInt("Health", health);
         PlayerPrefs.SetInt("Score", score);
-        UIManager.instance.SetActiveStageClearUI(true, level);
+        UIManager.instance.Invoke("SetActiveStageClearUI", 1);
 
         level++;
         Debug.Log(level);
@@ -70,6 +70,6 @@ public class GameManager : MonoBehaviour
     public void EndGame()
     {
         isGameover = true;
-        UIManager.instance.SetActiveGameOverUI(true);
+        UIManager.instance.SetActiveGameOverUI();
     }
 }

@@ -115,7 +115,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ground")
+        if (collision.gameObject.tag == "Ground" && collision.collider.GetType().IsEquivalentTo(typeof(BoxCollider2D)))
         {
             didJump = false;
             jumpCount = 0;

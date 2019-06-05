@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3867529675780188309}
   m_Layer: 0
   m_Name: SpikeBoxVert
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 3867529676025398163}
   m_Layer: 0
   m_Name: block
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -152,7 +152,7 @@ GameObject:
   - component: {fileID: 3867529676367324891}
   m_Layer: 0
   m_Name: Forest_deco_woodenThorns_2
-  m_TagString: Untagged
+  m_TagString: Spike
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -269,7 +269,7 @@ GameObject:
   - component: {fileID: 3867529676629070533}
   m_Layer: 0
   m_Name: Forest_deco_woodenThorns_1
-  m_TagString: Untagged
+  m_TagString: Spike
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
