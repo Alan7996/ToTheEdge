@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -31,5 +32,10 @@ public class UIManager : MonoBehaviour
     public void SetActiveGameoverUI(bool active)
     {
         gameoverUI.SetActive(active);
+    }
+
+    public void GameRestart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

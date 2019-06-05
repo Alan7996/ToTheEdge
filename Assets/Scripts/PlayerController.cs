@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 jumpForce = new Vector2(0, 350);
     private int jumpCount = 0;
     private bool didJump = false;
+    private bool hurt = false;
     private bool atDoor = false;
 
     public Sprite idleSprite;
@@ -26,6 +27,16 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.instance != null && GameManager.instance.isGameover)
+        {
+            playerRigidbody.gravityScale = 0;
+            playerRigidbody.velocity = Vector2.zero;
+            playerAnimator.SetBool("NotDead", false);
+            return;
+        }
+
+        if (hurt) return;
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
@@ -61,7 +72,6 @@ public class PlayerController : MonoBehaviour
         playerAnimator.speed = (absVelX != 0 && absVelX != 5) ? 0.5f : 1;
         if (didJump)
         {
-            playerAnimator.enabled = false;
             if (playerRigidbody.velocity.y > 0) playerRenderer.sprite = jumpUpSprite;
             else playerRenderer.sprite = jumpDownSprite;
         }
@@ -76,6 +86,12 @@ public class PlayerController : MonoBehaviour
             playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, 0);
             playerRigidbody.AddForce(jumpForce);
         }
+        playerAnimator.enabled = false;
+    }
+
+    private void ToggleHurt()
+    {
+        hurt = !hurt;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -85,6 +101,14 @@ public class PlayerController : MonoBehaviour
             didJump = false;
             jumpCount = 0;
             playerAnimator.enabled = true;
+        }
+        else if (collision.gameObject.tag == "Spike" && !hurt)
+        {
+            hurt = true;
+            playerAnimator.enabled = true;
+            playerAnimator.SetTrigger("Hurt");
+            Invoke("ToggleHurt", 1);
+            GameManager.instance.LoseHealth();
         }
     }
 

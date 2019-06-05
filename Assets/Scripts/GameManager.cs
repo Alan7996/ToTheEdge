@@ -19,7 +19,10 @@ public class GameManager : MonoBehaviour
 
     private static GameManager m_instance;
 
+    public GameObject[] stars;
+
     private int score = 0;
+    private int health = 3;
     private int level = 1;
     public bool isGameover { get; private set; }
 
@@ -31,16 +34,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        //FindObjectOfType<PlayerHealth>().onDeath += EndGame;
-    }
-
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0)) SceneManager.LoadScene(0);
-    }
-
     public void AddScore(int newScore)
     {
         if (!isGameover)
@@ -48,6 +41,14 @@ public class GameManager : MonoBehaviour
             score += newScore;
             UIManager.instance.UpdateScoreText(score);
         }
+    }
+
+    public void LoseHealth()
+    {
+        health--;
+        Destroy(stars[health]);
+
+        if (health == 0) EndGame();
     }
 
     public void LoadNextLevel()
