@@ -20,10 +20,12 @@ public class GameManager : MonoBehaviour
     private static GameManager m_instance;
 
     public GameObject[] stars;
+    public GameObject doorOpenPrefab;
 
     private int score = 0;
     private int health = 3;
     private int level = 1;
+    public bool isStageclear { get; private set; }
     public bool isGameover { get; private set; }
 
     private void Awake()
@@ -53,6 +55,13 @@ public class GameManager : MonoBehaviour
 
     public void LoadNextLevel()
     {
+        doorOpenPrefab.SetActive(true);
+        isStageclear = true;
+
+        PlayerPrefs.SetInt("Health", health);
+        PlayerPrefs.SetInt("Score", score);
+        UIManager.instance.SetActiveStageClearUI(true, level);
+
         level++;
         Debug.Log(level);
         //SceneManager.LoadScene(level);
@@ -61,6 +70,6 @@ public class GameManager : MonoBehaviour
     public void EndGame()
     {
         isGameover = true;
-        UIManager.instance.SetActiveGameoverUI(true);
+        UIManager.instance.SetActiveGameOverUI(true);
     }
 }

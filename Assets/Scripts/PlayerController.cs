@@ -10,6 +10,9 @@ public class PlayerController : MonoBehaviour
     private bool hurt = false;
     private bool atDoor = false;
 
+    private int cherryCount = 0;
+    private int gemCount = 0;
+
     public Sprite idleSprite;
     public Sprite jumpUpSprite;
     public Sprite jumpDownSprite;
@@ -27,24 +30,36 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.instance != null && GameManager.instance.isGameover)
+        // Reset motion and return if game over or stage cleared
+        if (GameManager.instance.isGameover)
         {
             playerRigidbody.gravityScale = 0;
             playerRigidbody.velocity = Vector2.zero;
             playerAnimator.SetBool("NotDead", false);
             return;
         }
+        else if (GameManager.instance.isStageclear)
+        {
+            playerRigidbody.gravityScale = 0;
+            playerRigidbody.velocity = Vector2.zero;
+            return;
+        }
 
+        // During hurt animation, no inputs allowed
         if (hurt) return;
 
+        // Space to jump and UpArrow to enter doors
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
         } else if (atDoor && Input.GetKeyDown(KeyCode.UpArrow))
         {
+            PlayerPrefs.SetInt("Cherry", cherryCount);
+            PlayerPrefs.SetInt("Gem", gemCount);
             GameManager.instance.LoadNextLevel();
         }
 
+        // Left Right smooth movements
         if (Input.GetKey(KeyCode.RightArrow))
         {
             transform.localScale = new Vector2(5, 5);
@@ -67,9 +82,12 @@ public class PlayerController : MonoBehaviour
 
         }
 
+        // Alter animation speed based on movement speed
         float absVelX = Mathf.Abs(playerRigidbody.velocity.x);
         playerAnimator.SetFloat("HorizMove", absVelX);
         playerAnimator.speed = (absVelX != 0 && absVelX != 5) ? 0.5f : 1;
+
+        // During jump motion, disabled animation and just use sprite renderer
         if (didJump)
         {
             if (playerRigidbody.velocity.y > 0) playerRenderer.sprite = jumpUpSprite;
@@ -89,6 +107,7 @@ public class PlayerController : MonoBehaviour
         playerAnimator.enabled = false;
     }
 
+    // Toggles "hurt" boolean
     private void ToggleHurt()
     {
         hurt = !hurt;
@@ -116,11 +135,13 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Cherry")
         {
+            cherryCount++;
             GameManager.instance.AddScore(100);
             Destroy(collision.gameObject);
         }
         else if (collision.gameObject.tag == "Gem")
         {
+            gemCount++;
             GameManager.instance.AddScore(1000);
             Destroy(collision.gameObject);
         }

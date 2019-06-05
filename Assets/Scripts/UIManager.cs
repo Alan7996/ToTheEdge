@@ -23,15 +23,29 @@ public class UIManager : MonoBehaviour
     
     public Text scoreText;
     public GameObject gameoverUI;
-    
+    public GameObject stageclearUI;
+    public Text stageClearLevelText;
+    public Text stageClearScoreText;
+    public Text stageClearCherryText;
+    public Text stageClearGemText;
+
     public void UpdateScoreText(int newScore)
     {
         scoreText.text = "SCORE : " + newScore;
     }
     
-    public void SetActiveGameoverUI(bool active)
+    public void SetActiveGameOverUI(bool active)
     {
         gameoverUI.SetActive(active);
+    }
+
+    public void SetActiveStageClearUI(bool active, int level)
+    {
+        stageclearUI.SetActive(active);
+        stageClearLevelText.text = "LEVEL " + level.ToString();
+        stageClearScoreText.text = PlayerPrefs.GetInt("Score").ToString();
+        stageClearCherryText.text = PlayerPrefs.GetInt("Cherry").ToString();
+        stageClearGemText.text = PlayerPrefs.GetInt("Gem").ToString();
     }
 
     public void GameRestart()
