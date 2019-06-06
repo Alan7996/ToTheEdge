@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3867529675780188309}
+  - component: {fileID: 2562314456953894689}
   m_Layer: 0
   m_Name: SpikeBoxVert
   m_TagString: Untagged
@@ -33,6 +34,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2562314456953894689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3867529675780188310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b6614557cf61eb499f63495567fdb6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPos: {x: 0, y: 0}
+  speed: 1
 --- !u!1 &3867529676025398165
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,7 +181,7 @@ Transform:
   m_GameObject: {fileID: 3867529676367324894}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.5, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 3867529675780188309}
   m_RootOrder: 2
@@ -244,11 +259,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.47125718, y: 0.017684348}
-      - {x: 0.43544066, y: 0.30188936}
-      - {x: -0.4016605, y: 0.30280802}
+    - - {x: 0.46653926, y: 0.021463156}
+      - {x: 0.43741745, y: 0.29991275}
+      - {x: 0.38556808, y: 0.3638193}
+      - {x: -0.36015207, y: 0.36605895}
       - {x: -0.47096625, y: 0.2237644}
-      - {x: -0.48157683, y: -0.019318659}
+      - {x: -0.47384483, y: -0.014600754}
       - {x: -0.21624282, y: 0.03787587}
       - {x: -0.12220191, y: 0.16493523}
       - {x: -0.11866506, y: 0.0141474595}
@@ -283,7 +299,7 @@ Transform:
   m_GameObject: {fileID: 3867529676629070536}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 3867529675780188309}
   m_RootOrder: 1
@@ -361,7 +377,7 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.4810769, y: 0.02158582}
+    - - {x: 0.47984248, y: 0.02129078}
       - {x: 0.21875, y: -0.028587328}
       - {x: 0.12349902, y: -0.16787513}
       - {x: 0.119850226, y: -0.009258786}
@@ -369,7 +385,8 @@ PolygonCollider2D:
       - {x: -0.18982357, y: -0.051225618}
       - {x: -0.17052926, y: -0.15542501}
       - {x: -0.21053202, y: -0.09461546}
-      - {x: -0.47326437, y: -0.011516013}
+      - {x: -0.47193182, y: -0.0114399195}
       - {x: -0.43275562, y: -0.2995376}
-      - {x: 0.41660428, y: -0.295725}
+      - {x: -0.3889156, y: -0.35996568}
+      - {x: 0.36125964, y: -0.36095262}
       - {x: 0.46956092, y: -0.22141261}

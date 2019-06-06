@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private Vector3 jumpForce = new Vector2(0, 350);
+    private Vector2 rightScale = new Vector2(5, 5);
+    private Vector2 leftScale = new Vector2(-5, 5);
+    private Vector2 jumpForce = new Vector2(0, 350);
     private int jumpCount = 0;
     private bool didJump = false;
     private bool hurt = false;
@@ -52,24 +54,24 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
-        } else if (atDoor && Input.GetKeyDown(KeyCode.UpArrow))
+        }
+        else if (atDoor && Input.GetKeyDown(KeyCode.UpArrow))
         {
             PlayerPrefs.SetInt("Cherry", cherryCount);
             PlayerPrefs.SetInt("Gem", gemCount);
             GameManager.instance.LoadNextLevel();
         }
-
+        
         // Left Right smooth movements
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            transform.localScale = new Vector2(5, 5);
+            transform.localScale = rightScale;
             playerRigidbody.velocity = new Vector2(6, playerRigidbody.velocity.y);
         }
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
-            transform.localScale = new Vector2(-5, 5);
+            transform.localScale = leftScale;
             playerRigidbody.velocity = new Vector2(-6, playerRigidbody.velocity.y);
-
         }
 
         if (Input.GetKeyUp(KeyCode.RightArrow))
@@ -129,6 +131,20 @@ public class PlayerController : MonoBehaviour
             Invoke("ToggleHurt", 1);
             GameManager.instance.LoseHealth();
         }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            transform.parent = collision.gameObject.transform;
+            //transform.localScale = scale;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        transform.parent = null;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
