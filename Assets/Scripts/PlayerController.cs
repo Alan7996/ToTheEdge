@@ -50,6 +50,9 @@ public class PlayerController : MonoBehaviour
         // During hurt animation, no inputs allowed
         if (hurt) return;
 
+        // Hurt scale bug not fixed yet
+        transform.parent = null;
+
         // Space to jump and UpArrow to enter doors
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -115,6 +118,16 @@ public class PlayerController : MonoBehaviour
         hurt = !hurt;
     }
 
+    public void CheckPointReposition()
+    {
+        playerAnimator.SetBool("NotDead", true);
+        playerAnimator.Play("FoxIdle");
+        playerRigidbody.gravityScale = 1;
+        didJump = false;
+        hurt = false;
+        transform.position = new Vector3(100, -3, -2);
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ground" && collision.collider.GetType().IsEquivalentTo(typeof(BoxCollider2D)))
@@ -138,13 +151,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
         {
             transform.parent = collision.gameObject.transform;
-            //transform.localScale = scale;
         }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        transform.parent = null;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -164,6 +171,14 @@ public class PlayerController : MonoBehaviour
         else if (collision.gameObject.tag == "Door")
         {
             atDoor = true;
+        }
+        else if (collision.gameObject.tag == "KillZone")
+        {
+            GameManager.instance.Die();
+        }
+        else if (collision.gameObject.tag == "Checkpoint")
+        {
+            UIManager.instance.CheckPoint();
         }
     }
 

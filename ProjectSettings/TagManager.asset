@@ -9,6 +9,8 @@ TagManager:
   - Cherry
   - Door
   - Spike
+  - KillZone
+  - Checkpoint
   layers:
   - Default
   - TransparentFX

@@ -48,9 +48,27 @@ public class GameManager : MonoBehaviour
     public void LoseHealth()
     {
         health--;
-        Destroy(stars[health]);
+        stars[health].SetActive(false);
 
         if (health == 0) EndGame();
+    }
+
+    public void ResetHealth()
+    {
+        isGameover = false;
+        health = 3;
+        foreach (GameObject star in stars) {
+            star.SetActive(true);
+        }
+    }
+
+    public void Die()
+    {
+        for (int i = --health; i >= 0; i--)
+        {
+            stars[health].SetActive(false);
+        }
+        EndGame();
     }
 
     public void LoadNextLevel()
