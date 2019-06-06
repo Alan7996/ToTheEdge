@@ -55,6 +55,7 @@ public class UIManager : MonoBehaviour
 
     public void CheckPoint()
     {
+        if (checkPointHit) return;
         checkPointHit = true;
         checkpointText.SetActive(true);
         Invoke("CPTextOff", 2);
